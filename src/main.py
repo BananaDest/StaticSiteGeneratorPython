@@ -9,8 +9,8 @@ def main():
     if len(sys.argv) > 1:
         basepath = sys.argv[1]
 
-    copy_recursively("static/", basepath)
-    generate_pages_recursively("content/", "template.html", basepath)
+    copy_recursively("./static", "./docs")
+    generate_pages_recursively("./content", "./template.html", "./docs", basepath)
 
 
 def copy_recursively(src, dest):
