@@ -81,16 +81,3 @@ def text_to_textnodes(text):
     codeblocks = split_nodes_delimiter(italics, "`", TextType.CODE)
     images = split_nodes_image(codeblocks)
     return split_nodes_link(images)
-
-
-def markdown_to_blocks(markdown):
-    if type(markdown) != str:
-        raise ValueError("not string")
-    list = markdown.split("\n\n")
-    result = []
-    for block in list:
-        block = block.strip().strip("\n")
-        if len(block) > 0:
-            result.append(block)
-    print(result)
-    return result
