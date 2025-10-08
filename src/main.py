@@ -5,11 +5,12 @@ import sys
 
 
 def main():
-    basepath = sys.argv[1]
-    if os.path.exists("public/"):
-        shutil.rmtree("public/")
-    copy_recursively("static/", "public/")
-    generate_pages_recursively("content/", "template.html", "public/")
+    basepath = "/"
+    if len(sys.argv) > 1:
+        basepath = sys.argv[1]
+
+    copy_recursively("static/", basepath)
+    generate_pages_recursively("content/", "template.html", basepath)
 
 
 def copy_recursively(src, dest):

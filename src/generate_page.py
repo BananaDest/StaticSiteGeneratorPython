@@ -13,8 +13,11 @@ def generate_page(from_path, template_path, dest_path):
     from_html_node = markdown_to_html_node(from_file)
     from_html_string = from_html_node.to_html()
     title = extract_title(from_file)
-    template_full = template_file.replace("{{ Title }}", title).replace(
-        "{{ Content }}", from_html_string
+    template_full = (
+        template_file.replace("{{ Title }}", title)
+        .replace("{{ Content }}", from_html_string)
+        .replace('href="/', f'href="{dest_path}')
+        .replace('src="/', f'src="{dest_path}')
     )
     with open(dest_path, "w") as file:
         file.write(template_full)
@@ -22,7 +25,6 @@ def generate_page(from_path, template_path, dest_path):
 
 def generate_pages_recursively(dir_path_content, template_path, dest_dir_path):
     for entry in os.listdir(dir_path_content):
-        print(entry)
         if os.path.isfile(os.path.join(dir_path_content, entry)):
             generate_page(
                 os.path.join(dir_path_content, entry),
